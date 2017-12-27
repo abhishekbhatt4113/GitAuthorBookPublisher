@@ -12,7 +12,9 @@ public class Book {
     private Long bookId;
     private String title;
     private String isbn;
-    private String publisher;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Publisher publisher;
 
     @ManyToMany
     @JoinTable(name = "Book_Author",
@@ -23,14 +25,14 @@ public class Book {
     public Book() {
     }
 
-    public Book(Long bookId, String title, String isbn, String publisher) {
+    public Book( String title, String isbn, Publisher publisher) {
         this.bookId = bookId;
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
     }
 
-    public Book(Long bookId, String title, String isbn, String publisher, Set<Author> authors) {
+    public Book(Long bookId, String title, String isbn, Publisher publisher, Set<Author> authors) {
         this.bookId = bookId;
         this.title = title;
         this.isbn = isbn;
@@ -62,11 +64,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getPublisher() {
+    public Publisher getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(String publisher) {
+    public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
 
